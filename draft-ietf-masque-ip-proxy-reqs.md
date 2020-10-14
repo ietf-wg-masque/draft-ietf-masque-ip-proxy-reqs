@@ -1,7 +1,7 @@
 ---
 title: Requirements for a MASQUE Protocol to Proxy IP Traffic
 abbrev: IP Proxying Requirements
-docname: draft-cms-masque-ip-proxy-reqs-latest
+docname: draft-ietf-masque-ip-proxy-reqs-latest
 category: info
 
 ipr: trust200902
@@ -44,7 +44,7 @@ of requirements for such a protocol.
 
 Discussion of this work is encouraged to happen on the MASQUE IETF mailing
 list [](masque@ietf.org) or on the GitHub repository which contains the draft:
-[](https://github.com/DavidSchinazi/masque-drafts).
+[](https://github.com/ietf-wg-masque/draft-ietf-masque-ip-proxy-reqs).
 
 
 --- middle
@@ -61,13 +61,13 @@ another protocol to their security posture.
 This document describes the set of requirements for a protocol that can proxy
 IP traffic over HTTP. The requirements outlined below are similar to the
 considerations made in designing the CONNECT-UDP method
-{{?CONNECT-UDP=I-D.schinazi-masque-connect-udp}}, additionally including
+{{?CONNECT-UDP=I-D.ietf-masque-connect-udp}}, additionally including
 IP-specific requirements, such as a means of negotiating the routes that should
 be advertised on either end of the connection.
 
 Discussion of this work is encouraged to happen on the MASQUE IETF mailing list
 [](masque@ietf.org) or on the GitHub repository which contains the draft:
-[](https://github.com/DavidSchinazi/masque-drafts).
+[](https://github.com/ietf-wg-masque/draft-ietf-masque-ip-proxy-reqs).
 
 ## Conventions
 
