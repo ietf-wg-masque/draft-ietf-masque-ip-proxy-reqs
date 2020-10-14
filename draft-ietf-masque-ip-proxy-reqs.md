@@ -270,7 +270,7 @@ negotiate NAT bindings, or check connectivity through a NAT is explicitly out
 of scope and left to future extensions.
 
 Servers that do not perform NAT will commonly forward packets similarly to how
-a traditionnal IP router would, but the specific of that are considered out of
+a traditional IP router would, but the specific of that are considered out of
 scope. In particular, decrementing the Hop Limit (or TTL) field of the IP header
 is out of scope for MASQUE and expected to be performed by a router behind the
 MASQUE server, or collocated with it.
