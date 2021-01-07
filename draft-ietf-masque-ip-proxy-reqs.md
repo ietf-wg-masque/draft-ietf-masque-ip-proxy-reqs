@@ -225,16 +225,9 @@ Since recent HTTP versions support concurrently running multiple requests over
 the same connection, the protocol SHOULD support multiple independent instances
 of IP proxying over a given HTTP connection.
 
-## Load balancing
+# Extensibility
 
-The IP proxying mechanisms should allow for load balancing of the traffic sent
-across the session, such as to another server. This allows the IP proxying
-mechanicsms to scale-out to multiple servers.  This capability may be
-implemented as an extension. The document defining the new capability/extension
-should provide guidance for when additional connections and/or sessions should
-be opened, as opposed to reusing existing ones.
-
-## Extensibility
+## General Capability
 
 The protocol will provide a mechanism by which clients and servers can add
 extension information to the exchange that establishes the IP session. If the
@@ -244,6 +237,15 @@ HTTP headers.
 Once the session is established, the protocol will provide a mechanism that
 allows reliably exchanging vendor-specific messages in both directions at any
 point in the lifetime of the IP Session.
+
+## Load balancing
+
+The IP proxying mechanisms should allow for load balancing of the traffic sent
+across the session, such as to another server. This allows the IP proxying
+mechanicsms to scale-out to multiple servers.  This capability may be
+implemented as one or more extensions. The document defining the new
+capability/extension should provide guidance for when additional connections
+and/or sessions should be opened, as opposed to reusing existing ones.
 
 # Non-requirements
 
