@@ -83,7 +83,8 @@ when, and only when, they appear in all capitals, as shown here.
 
 * IP Session: An association between client and server whereby both agree to
   proxy IP traffic given certain configuration properties. This is similar to a
-  Child Security Association in IKEv2 terminology.
+  Child Security Association in IKEv2 terminology. An IP Session uses a
+  particular Data Transport to transmit packets.
 
 # Use Cases
 
@@ -206,7 +207,7 @@ performance.
 ## Indistinguishability
 
 A passive network observer not participating in the encrypted connection should
-not be able to distinguish an IP proxying session from regular encrypted HTTP
+not be able to distinguish an proxying IP session from regular encrypted HTTP
 Web traffic. Specifically, any data sent unencrypted (such as headers, or parts
 of the handshake) should look like the same unencrypted data that would be
 present for Web traffic. Traffic analysis is out of scope for this requirement.
