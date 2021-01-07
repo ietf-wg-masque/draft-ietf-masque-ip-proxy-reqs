@@ -227,14 +227,12 @@ of IP proxying over a given HTTP connection.
 
 ## Load balancing
 
-Clients and servers should each be able to instantiate new Data Transports.
-This facilitates multi-threaded servers being able to handle a higher bandwidth
-of IP proxied packets.
-
-The IP proxying mechanisms need to support load balancing of the traffic sent
-across the session, such as to another server. The document defining the new
-protocol should provide guidance for when additional connections and/or
-sessions should be opened, as opposed to reusing existing ones.
+The IP proxying mechanisms should allow for load balancing of the traffic sent
+across the session, such as to another server. This allows the IP proxying
+mechanicsms to scale-out to multiple servers.  This capability may be
+implemented as an extension. The document defining the new capability/extension
+should provide guidance for when additional connections and/or sessions should
+be opened, as opposed to reusing existing ones.
 
 ## Extensibility
 
