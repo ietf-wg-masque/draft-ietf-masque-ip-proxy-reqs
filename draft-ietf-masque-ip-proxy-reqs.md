@@ -180,12 +180,11 @@ confidentiality and integrity. Using QUIC or TLS would meet this requirement.
 ## Authentication
 
 Additionally to the authentication provided by the transport, the protocol will
-have the ability to authenticate both client and server during the
-establishment of the IP Session. In particular, it will be possible for the
-client to offer an OAuth Access Token {{?OAUTH=RFC6749}} to the server when
-requesting IP proxying, potentially through an extension of the protocol. The
-protocol will also have the ability to support vendor-specific authentication
-mechanisms as extensions.
+have the ability to authenticate both client and server during the establishment
+of the IP Session. For example, a client may offer an OAuth Access Token
+{{?OAUTH=RFC6749}} to the server when requesting IP proxying, potentially
+through an extension of the protocol. The protocol will also have the ability to
+support vendor-specific authentication mechanisms as extensions.
 
 ## Reliable Transmission of IP Packets
 
