@@ -151,11 +151,11 @@ along the path.
 ## IP Assignment
 
 The client will be able to request to be assigned an IP address range,
-optionally specifying a preferred range. In response to that request, the
-server will either assign a range of its choosing to the client, or decline the
-request. Similarly, to support the network-to-network use case, the server will
-be able to request assignment of an IP address range from the client, and the
-client will either assign a range or decline the request.
+optionally specifying a preferred range. In response to that request, the server
+will either assign a range of its choosing to the client, or decline the
+request. For symmetry, the server may request assignment of an IP address range
+from the client, and the client will either assign a range or decline the
+request.
 
 ## Route Negotiation
 
