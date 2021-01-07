@@ -138,8 +138,10 @@ The server will have the ability to accept or deny the client's request.
 ## Proxying of IP packets
 
 The protocol will establish Data Transports, which will be able to forward IP
-packets, in their unmodified entirety. The protocol will support both IPv6
-{{!IPV6=RFC8200}} and IPv4 {{!IPV4=RFC0791}}.
+packets. The data transports must be able to forward packets in their unmodified
+entirety, although extensions may enable the use of modified packet formats
+(e.g., compression). The protocol will support both IPv6 {{!IPV6=RFC8200}} and
+IPv4 {{!IPV4=RFC0791}}.
 
 ## Maximum Transmission Unit
 
