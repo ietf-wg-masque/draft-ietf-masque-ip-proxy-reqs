@@ -83,7 +83,8 @@ when, and only when, they appear in all capitals, as shown here.
 
 * IP Session: An association between client and server whereby both agree to
   proxy IP traffic given certain configuration properties. This is similar to a
-  Child Security Association in IKEv2 terminology.
+  Child Security Association in IKEv2 terminology. An IP Session uses a
+  particular Data Transport to transmit packets.
 
 # Use Cases
 
@@ -138,8 +139,10 @@ The server will have the ability to accept or deny the client's request.
 ## Proxying of IP packets
 
 The protocol will establish Data Transports, which will be able to forward IP
-packets, in their unmodified entirety. The protocol will support both IPv6
-{{!IPV6=RFC8200}} and IPv4 {{!IPV4=RFC0791}}.
+packets. The data transports must be able to forward packets in their unmodified
+entirety, although extensions may enable the use of modified packet formats
+(e.g., compression). The protocol will support both IPv6 {{!IPV6=RFC8200}} and
+IPv4 {{!IPV4=RFC0791}}.
 
 ## Maximum Transmission Unit
 
@@ -151,11 +154,11 @@ along the path.
 ## IP Assignment
 
 The client will be able to request to be assigned an IP address range,
-optionally specifying a preferred range. In response to that request, the
-server will either assign a range of its choosing to the client, or decline the
-request. Similarly, to support the network-to-network use case, the server will
-be able to request assignment of an IP address range from the client, and the
-client will either assign a range or decline the request.
+optionally specifying a preferred range. In response to that request, the server
+will either assign a range of its choosing to the client, or decline the
+request. For symmetry, the server may request assignment of an IP address range
+from the client, and the client will either assign a range or decline the
+request.
 
 ## Route Negotiation
 
@@ -180,12 +183,11 @@ confidentiality and integrity. Using QUIC or TLS would meet this requirement.
 ## Authentication
 
 Additionally to the authentication provided by the transport, the protocol will
-have the ability to authenticate both client and server during the
-establishment of the IP Session. In particular, it will be possible for the
-client to offer an OAuth Access Token {{?OAUTH=RFC6749}} to the server when
-requesting IP proxying, potentially through an extension of the protocol. The
-protocol will also have the ability to support vendor-specific authentication
-mechanisms as extensions.
+have the ability to authenticate both client and server during the establishment
+of the IP Session. For example, a client may offer an OAuth Access Token
+{{?OAUTH=RFC6749}} to the server when requesting IP proxying, potentially
+through an extension of the protocol. The protocol will also have the ability to
+support vendor-specific authentication mechanisms as extensions.
 
 ## Reliable Transmission of IP Packets
 
@@ -205,7 +207,7 @@ performance.
 ## Indistinguishability
 
 A passive network observer not participating in the encrypted connection should
-not be able to distinguish an IP proxying session from regular encrypted HTTP
+not be able to distinguish an proxying IP session from regular encrypted HTTP
 Web traffic. Specifically, any data sent unencrypted (such as headers, or parts
 of the handshake) should look like the same unencrypted data that would be
 present for Web traffic. Traffic analysis is out of scope for this requirement.
@@ -225,18 +227,9 @@ Since recent HTTP versions support concurrently running multiple requests over
 the same connection, the protocol SHOULD support multiple independent instances
 of IP proxying over a given HTTP connection.
 
-## Load balancing
+# Extensibility
 
-Clients and servers should each be able to instantiate new Data Transports.
-This facilitates multi-threaded servers being able to handle a higher bandwidth
-of IP proxied packets.
-
-The IP proxying mechanisms need to support load balancing of the traffic sent
-across the session, such as to another server. The document defining the new
-protocol should provide guidance for when additional connections and/or
-sessions should be opened, as opposed to reusing existing ones.
-
-## Extensibility
+## General Capability
 
 The protocol will provide a mechanism by which clients and servers can add
 extension information to the exchange that establishes the IP session. If the
@@ -246,6 +239,15 @@ HTTP headers.
 Once the session is established, the protocol will provide a mechanism that
 allows reliably exchanging vendor-specific messages in both directions at any
 point in the lifetime of the IP Session.
+
+## Load balancing
+
+The IP proxying mechanisms should allow for load balancing of the traffic sent
+across the session, such as to another server. This allows the IP proxying
+mechanicsms to scale-out to multiple servers.  This capability may be
+implemented as one or more extensions. The document defining the new
+capability/extension should provide guidance for when additional connections
+and/or sessions should be opened, as opposed to reusing existing ones.
 
 # Non-requirements
 
