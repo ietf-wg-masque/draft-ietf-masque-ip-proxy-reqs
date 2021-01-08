@@ -78,18 +78,20 @@ when, and only when, they appear in all capitals, as shown here.
 
 ## Definitions
 
-* Data Transport: The method by which IP packets are transmitted. This can
-  involve streams or datagrams.
+* Data Transport: The mechanism responsible for transmitting IP packets over
+  HTTP. This can involve streams or datagrams.
 
 * IP Session: An association between client and server whereby both agree to
   proxy IP traffic given certain configuration properties. This is similar to a
-  Child Security Association in IKEv2 terminology. An IP Session uses a
-  particular Data Transport to transmit packets.
+  Child Security Association in IKEv2 terminology. An IP Session uses Data
+  Transports to transmit packets.
 
 # Use Cases
 
 There are multiple reasons to deploy an IP proxying protocol. This section
 discusses some examples of use cases that MUST be supported by the protocol.
+Note that while the protocol needs to support these use cases, the protocol
+elements that allow them may be optional.
 
 ## Consumer VPN
 
@@ -117,8 +119,8 @@ public Internet.
 
 ## Network to Network Connectivity
 
-Network-to-Network connectivity is also called a site-to-site VPN. Like the
-point-to-network use case, the goal is to connect to a network that is not
+Network-to-Network connectivity is also called a site-to-site VPN. Similar to
+the point-to-network use case, the goal is to connect two networks that are not
 exposed publicly. The site-to-site aspects make this transparent to the user;
 the entire networks are connected to each other and route packets transparently
 without a VPN client installed on the user's device. This style of connectivity
@@ -139,7 +141,7 @@ The server will have the ability to accept or deny the client's request.
 ## Proxying of IP packets
 
 The protocol will establish Data Transports, which will be able to forward IP
-packets. The data transports must be able to forward packets in their unmodified
+packets. The Data Transports MUST be able to forward packets in their unmodified
 entirety, although extensions may enable the use of modified packet formats
 (e.g., compression). The protocol will support both IPv6 {{!IPV6=RFC8200}} and
 IPv4 {{!IPV4=RFC0791}}.
@@ -167,34 +169,20 @@ protocol will allow both client and server to inform its peer that it can route
 a set of IP prefixes. Both endpoints can also request a route to a given prefix,
 and the peer can choose to provide that route or not.
 
+Note that if an endpoint provides its peer with a route, the peer is in no way
+obligated to route its traffic through the endpoint.
+
 ## Identity
 
 When negotiating the creation of an IP Session, the protocol will allow both
-endpoints to exchange an identifier. For example, both endpoints will be able
-to identify themselves by sending a fully-qualified domain name. Note that
-the Identity requirement does not cover authenticating the identifier; that
-requirement is covered by {{authentication}}.
+endpoints to exchange an identifier. As examples, the identity could be a user
+name, an email address, a token, or a fully-qualified domain name. Note that
+this requirement does not cover authenticating the identifier.
 
 ## Transport Security
 
 The protocol MUST be run over a protocol that provides mutual authentication,
 confidentiality and integrity. Using QUIC or TLS would meet this requirement.
-
-## Authentication
-
-Additionally to the authentication provided by the transport, the protocol will
-have the ability to authenticate both client and server during the establishment
-of the IP Session. For example, a client may offer an OAuth Access Token
-{{?OAUTH=RFC6749}} to the server when requesting IP proxying, potentially
-through an extension of the protocol. The protocol will also have the ability to
-support vendor-specific authentication mechanisms as extensions.
-
-## Reliable Transmission of IP Packets
-
-While it is desirable to transmit IP packets unreliably in most cases, the
-protocol will provide a mechanism to allow forwarding some packets reliably.
-For example, when using HTTP/3, this can be accomplished by allowing Data
-Transports to run over both DATAGRAM and STREAM frames.
 
 ## Flow Control
 
@@ -207,10 +195,11 @@ performance.
 ## Indistinguishability
 
 A passive network observer not participating in the encrypted connection should
-not be able to distinguish an proxying IP session from regular encrypted HTTP
-Web traffic. Specifically, any data sent unencrypted (such as headers, or parts
-of the handshake) should look like the same unencrypted data that would be
-present for Web traffic. Traffic analysis is out of scope for this requirement.
+not be able to distinguish IP proxying from regular encrypted HTTP Web traffic
+by only observing non-encrypted parts of the traffic. Specifically, any data
+sent unencrypted (such as headers, or parts of the handshake) should look like
+the same unencrypted data that would be present for Web traffic. Traffic
+analysis is out of scope for this requirement.
 
 ## Support HTTP/2 and HTTP/3
 
@@ -229,25 +218,51 @@ of IP proxying over a given HTTP connection.
 
 # Extensibility
 
-## General Capability
-
 The protocol will provide a mechanism by which clients and servers can add
-extension information to the exchange that establishes the IP session. If the
+extension information to the exchange that establishes the IP Session. If the
 solution uses an HTTP request and response, this could be accomplished using
 HTTP headers.
 
-Once the session is established, the protocol will provide a mechanism that
-allows reliably exchanging vendor-specific messages in both directions at any
-point in the lifetime of the IP Session.
+Once the IP Session is established, the protocol will provide a mechanism that
+allows reliably exchanging extension messages in both directions at any point
+in the lifetime of the IP Session.
+
+The subsections below list possible extensions that designers of the protocol
+will keep in mind to ensure it will be possible to design such extensions.
 
 ## Load balancing
 
-The IP proxying mechanisms should allow for load balancing of the traffic sent
-across the session, such as to another server. This allows the IP proxying
-mechanicsms to scale-out to multiple servers.  This capability may be
-implemented as one or more extensions. The document defining the new
-capability/extension should provide guidance for when additional connections
-and/or sessions should be opened, as opposed to reusing existing ones.
+This extension would allow for load balancing of the traffic sent across the IP
+Session, such as to another server. This allows the IP proxying mechanisms to
+scale-out to multiple servers.
+
+## Authentication
+
+Since the protocol will offer a way to convey identity, extensions will allow
+authenticating that identity, from both the client and server, during the
+establishment of the IP Session. For example, an extension could allow a client
+to offer an OAuth Access Token {{?OAUTH=RFC6749}} when requesting an IP
+Session. As another example, another extension could allow an endpoint to
+demonstrate knowledge of a cryptographic secret.
+
+## Reliable Transmission of IP Packets
+
+While it is desirable to transmit IP packets unreliably in most cases, an
+extension could provide a mechanism to allow forwarding some packets reliably.
+For example, when using HTTP/3, this can be accomplished by allowing Data
+Transports to run over both DATAGRAM and STREAM frames.
+
+## Configuration of Congestion and Flow Control
+
+An extension will allow exchanging congestion and flow control parameters to
+improve performance. For example, an extension could disable congestion control
+for non-retransmitted Data Transports if it knows that the proxied traffic is
+itself congestion-controlled.
+
+## Data Transport Compression
+
+While the core protocol Data Transports will transmit IP packets in their
+unmodified entirety, an extension can allow compressing these packets.
 
 # Non-requirements
 
@@ -262,6 +277,12 @@ proxying. It does not discuss how the IPs assigned are determined, managed, or
 translated. While these details are important for producing a functional
 system, they do not need to be handled by the protocol beyond the ability to
 convey those assignments.
+
+Similarly, "ownership" of an IP range is out of scope. If an endpoint
+communicates to its peer that it can allocate addresses from a range, or route
+traffic to a range, the peer has no obligation to trust that information.
+Whether or not to trust this information is left to individual implementations
+and deployments.
 
 ## Translation
 
@@ -280,8 +301,9 @@ MASQUE server, or collocated with it.
 ## IP Packet Extraction
 
 How packets are forwarded between the IP proxying connection and the physical
-network is out of scope. This is deliberately not specified and will be left to
-individual implementations.
+network is out of scope. For example, this can be accomplished on some
+operating systems using a TUN interface. How this is done is deliberately not
+specified and will be left to individual implementations.
 
 # Security Considerations
 
