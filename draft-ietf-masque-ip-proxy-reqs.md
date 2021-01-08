@@ -262,7 +262,7 @@ itself congestion-controlled.
 ## Data Transport Compression
 
 While the core protocol Data Transports will transmit IP packets in their
-unmodified entirety, extensions will allow compressing these packets.
+unmodified entirety, an extension can allow compressing these packets.
 
 # Non-requirements
 
