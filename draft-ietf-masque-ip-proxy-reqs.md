@@ -216,6 +216,12 @@ Since recent HTTP versions support concurrently running multiple requests over
 the same connection, the protocol SHOULD support multiple independent instances
 of IP proxying over a given HTTP connection.
 
+## Statefulness
+
+The protocol should limit the amount of state a MASQUE client or server needs to
+operate. Keeping minimal state simplifies reconnection in the presence of
+failures and can facilitate extensibility.
+
 # Extensibility
 
 The protocol will provide a mechanism by which clients and servers can add
@@ -229,12 +235,6 @@ in the lifetime of the IP Session.
 
 The subsections below list possible extensions that designers of the protocol
 will keep in mind to ensure it will be possible to design such extensions.
-
-## Load balancing
-
-This extension would allow for load balancing of the traffic sent across the IP
-Session, such as to another server. This allows the IP proxying mechanisms to
-scale-out to multiple servers.
 
 ## Authentication
 
