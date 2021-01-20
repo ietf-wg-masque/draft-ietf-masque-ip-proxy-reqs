@@ -192,6 +192,17 @@ and would meet this requirement. The document defining the protocol will
 provide guidance on how best to use flow control to improve IP Session
 performance.
 
+## Reliable Transmission of IP Packets
+
+While it is desirable to transmit IP packets unreliably in most cases, support
+for datagrams in HTTP is optional and as such there always has to be an alternative
+Data Transport that is realiable. For example, when using HTTP/3, this is accomplished
+by running Data Transports over either DATAGRAM or STREAM frames.
+
+As it can be desireable for some transmission to have additional reliability on
+the tunneled link, e.g. in high loss networks, there should be an option for the
+client to request the use of a reliable Data Transport.
+
 ## Indistinguishability
 
 A passive network observer not participating in the encrypted connection should
@@ -244,13 +255,6 @@ establishment of the IP Session. For example, an extension could allow a client
 to offer an OAuth Access Token {{?OAUTH=RFC6749}} when requesting an IP
 Session. As another example, another extension could allow an endpoint to
 demonstrate knowledge of a cryptographic secret.
-
-## Reliable Transmission of IP Packets
-
-While it is desirable to transmit IP packets unreliably in most cases, an
-extension could provide a mechanism to allow forwarding some packets reliably.
-For example, when using HTTP/3, this can be accomplished by allowing Data
-Transports to run over both DATAGRAM and STREAM frames.
 
 ## Configuration of Congestion and Flow Control
 
