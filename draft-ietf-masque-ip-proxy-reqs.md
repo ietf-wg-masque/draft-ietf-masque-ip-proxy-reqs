@@ -162,6 +162,14 @@ request. For symmetry, the server may request assignment of an IP address range
 from the client, and the client will either assign a range or decline the
 request.
 
+## Data Transport Compression
+
+While any complex compression mechanism could always be realized at later times
+in an extension, the core protocol design should consider oppertunities where
+per-packet bits can be saved easily. One such example is that the proxy will
+learn the destination IP address during the forwarding request, as such that
+field could simply be removed on a per-packet basis.
+
 ## Route Negotiation
 
 At any point in an IP Session (not limited to its initial negotiation), the
@@ -258,11 +266,6 @@ An extension will allow exchanging congestion and flow control parameters to
 improve performance. For example, an extension could disable congestion control
 for non-retransmitted Data Transports if it knows that the proxied traffic is
 itself congestion-controlled.
-
-## Data Transport Compression
-
-While the core protocol Data Transports will transmit IP packets in their
-unmodified entirety, an extension can allow compressing these packets.
 
 # Non-requirements
 
