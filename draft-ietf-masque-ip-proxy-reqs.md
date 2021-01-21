@@ -196,10 +196,10 @@ performance.
 
 While it is desirable to transmit IP packets unreliably in most cases, support
 for datagrams in HTTP is optional and as such there always has to be an alternative
-Data Transport that is realiable. For example, when using HTTP/3, this is accomplished
+Data Transport that is reliable. For example, when using HTTP/3, this is accomplished
 by running Data Transports over either DATAGRAM or STREAM frames.
 
-As it can be desireable for some transmission to have additional reliability on
+As it can be desirable for some transmission to have additional reliability on
 the tunneled link, e.g. in high loss networks, there should be an option for the
 client to request the use of a reliable Data Transport.
 
