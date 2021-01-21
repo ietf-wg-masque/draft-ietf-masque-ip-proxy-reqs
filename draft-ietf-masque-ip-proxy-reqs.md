@@ -165,7 +165,7 @@ request.
 ## Data Transport Compression
 
 While any complex compression mechanism could always be realized at later times
-in an extension, the core protocol design should consider oppertunities where
+in an extension, the core protocol design should consider opportunities where
 per-packet bits can be saved easily. One such example is that the proxy will
 learn the destination IP address during the forwarding request, as such that
 field could simply be removed on a per-packet basis.
