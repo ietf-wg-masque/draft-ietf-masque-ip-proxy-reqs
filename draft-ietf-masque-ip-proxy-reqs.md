@@ -167,8 +167,9 @@ request.
 
 At any point in an IP Session (not limited to its initial negotiation), the
 protocol will allow both client and server to inform its peer that it can route
-a set of IP prefixes. Both endpoints can also request a route to a given prefix,
-and the peer can choose to provide that route or not.
+a set of IP prefixes. Both endpoints can also request a route to a given
+prefix, and the peer can choose to provide that route or not. This can be used
+to inform peers of a default route for all prefixes.
 
 Note that if an endpoint provides its peer with a route, the peer is in no way
 obligated to route its traffic through the endpoint.
