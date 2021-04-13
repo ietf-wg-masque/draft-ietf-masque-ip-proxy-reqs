@@ -207,7 +207,7 @@ analysis is out of scope for this requirement.
 The IP proxying protocol discussed in this document will run over HTTP. The
 protocol SHOULD strongly prefer to use HTTP/3 {{!H3=I-D.ietf-quic-http}} and
 SHOULD use the QUIC DATAGRAM frames {{!DGRAM=I-D.ietf-quic-datagram}} when
-available to improve performance. The protocol SHOULD also support HTTP/2
+available to improve performance. The protocol MUST also support HTTP/2
 {{!H2=RFC7540}} as a fallback when UDP is blocked on the network path. Proxying
 IP over HTTP/2 MAY result in lower performance than over HTTP/3.
 
