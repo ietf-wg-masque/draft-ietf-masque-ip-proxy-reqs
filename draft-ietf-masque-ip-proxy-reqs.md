@@ -283,7 +283,9 @@ Similarly, "ownership" of an IP range is out of scope. If an endpoint
 communicates to its peer that it can allocate addresses from a range, or route
 traffic to a range, the peer has no obligation to trust that information.
 Whether or not to trust this information is left to individual implementations
-and deployments.
+and extensions: the protocol will be extensible enough to allow the
+development of extensions that assist in assessing this trust.
+
 
 ## Translation
 
