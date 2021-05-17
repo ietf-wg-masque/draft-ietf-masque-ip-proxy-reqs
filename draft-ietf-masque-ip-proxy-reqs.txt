@@ -5,8 +5,8 @@
 Network Working Group                                  A. Chernyakhovsky
 Internet-Draft                                                 D. McCall
 Intended status: Informational                               D. Schinazi
-Expires: 1 November 2021                                      Google LLC
-                                                           30 April 2021
+Expires: 18 November 2021                                     Google LLC
+                                                             17 May 2021
 
 
          Requirements for a MASQUE Protocol to Proxy IP Traffic
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 November 2021.
+   This Internet-Draft will expire on 18 November 2021.
 
 Copyright Notice
 
@@ -222,7 +222,10 @@ Table of Contents
    request, the server will either assign a range of its choosing to the
    client, or decline the request.  For symmetry, the server may request
    assignment of an IP address range from the client, and the client
-   will either assign a range or decline the request.
+   will either assign a range or decline the request.  Endpoints will
+   also have the ability to assign an IP address range to their peer,
+   and to communicate that assignment to the peer, without having
+   received a request.
 
 3.5.  Route Negotiation
 
