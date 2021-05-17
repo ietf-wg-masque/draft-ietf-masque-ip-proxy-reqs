@@ -156,12 +156,17 @@ along the path.
 
 ## IP Assignment
 
-The client will be able to request to be assigned an IP address range,
-optionally specifying a preferred range. In response to that request, the server
-will either assign a range of its choosing to the client, or decline the
-request. For symmetry, the server may request assignment of an IP address range
-from the client, and the client will either assign a range or decline the
-request.
+The IP address or range of IP addresses can either be assigned by the client
+or the proxy. If the address is assigned by the client, the proxy has to ensure
+that the IP address is from a valid range that the client has authority of and that
+return traffic is routed correctly over the proxy.
+
+If the proxy selects the IP address, there should be a way for the proxy
+to indicate the address to the client. In both cases, it may further be possible
+for either the client or proxy to request a certain address or range,
+which may be declined however. Eventually, the possibility to issue requests
+for either the client or the proxy might be desired. However, such requests
+could eventually be realized in an extension.
 
 ## Route Negotiation
 
