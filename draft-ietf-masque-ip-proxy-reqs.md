@@ -161,7 +161,8 @@ optionally specifying a preferred range. In response to that request, the server
 will either assign a range of its choosing to the client, or decline the
 request. For symmetry, the server may request assignment of an IP address range
 from the client, and the client will either assign a range or decline the
-request.
+request. Endpoints will also have the ability to assign an IP address range to
+their peer without having received a request.
 
 ## Route Negotiation
 
