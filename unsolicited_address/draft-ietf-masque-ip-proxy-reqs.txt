@@ -5,8 +5,8 @@
 Network Working Group                                  A. Chernyakhovsky
 Internet-Draft                                                 D. McCall
 Intended status: Informational                               D. Schinazi
-Expires: 15 October 2021                                      Google LLC
-                                                           13 April 2021
+Expires: 18 November 2021                                     Google LLC
+                                                             17 May 2021
 
 
          Requirements for a MASQUE Protocol to Proxy IP Traffic
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 October 2021.
+   This Internet-Draft will expire on 18 November 2021.
 
 Copyright Notice
 
@@ -222,7 +222,9 @@ Table of Contents
    request, the server will either assign a range of its choosing to the
    client, or decline the request.  For symmetry, the server may request
    assignment of an IP address range from the client, and the client
-   will either assign a range or decline the request.
+   will either assign a range or decline the request.  Endpoints will
+   also have the ability to assign an IP address range to their peer
+   without having received a request.
 
 3.5.  Route Negotiation
 
@@ -273,7 +275,7 @@ Table of Contents
    The IP proxying protocol discussed in this document will run over
    HTTP.  The protocol SHOULD strongly prefer to use HTTP/3 [H3] and
    SHOULD use the QUIC DATAGRAM frames [DGRAM] when available to improve
-   performance.  The protocol SHOULD also support HTTP/2 [H2] as a
+   performance.  The protocol MUST also support HTTP/2 [H2] as a
    fallback when UDP is blocked on the network path.  Proxying IP over
    HTTP/2 MAY result in lower performance than over HTTP/3.
 
@@ -356,7 +358,9 @@ Table of Contents
    endpoint communicates to its peer that it can allocate addresses from
    a range, or route traffic to a range, the peer has no obligation to
    trust that information.  Whether or not to trust this information is
-   left to individual implementations and deployments.
+   left to individual implementations and extensions: the protocol will
+   be extensible enough to allow the development of extensions that
+   assist in assessing this trust.
 
 5.2.  Translation
 
