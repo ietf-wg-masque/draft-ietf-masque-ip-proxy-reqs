@@ -149,10 +149,12 @@ both IPv6 {{!IPV6=RFC8200}} and IPv4 {{!IPV4=RFC0791}}.
 
 ## Maximum Transmission Unit
 
-The protocol will allow endpoints to inform each other of the Maximum
+The protocol will allow tunnel endpoints to inform each other of the Maximum
 Transmission Unit (MTU) they are willing to forward. This will allow avoiding
-IP fragmentation, especially as IPv6 does not allow IP fragmentation by nodes
-along the path.
+some IP fragmentation, especially as IPv6 does not allow IP fragmentation by
+nodes along the path. In cases where the tunnel endpoint is not the same as the
+communication endpoint, tunnel endpoints are expected to apply the guidance on
+UDP tunnels in {{?BCP145=RFC8085}}.
 
 ## IP Assignment
 
@@ -310,6 +312,16 @@ How packets are forwarded between the IP proxying connection and the physical
 network is out of scope. For example, this can be accomplished on some
 operating systems using a TUN interface. How this is done is deliberately not
 specified and will be left to individual implementations.
+
+## Trust
+
+All the use-cases described in {{use-cases}} require some level of trust
+between endpoints. However, how this trust is established and what decisions
+endpoints make based on this trust is considered out of scope. For example, if
+an endpoint doesn't sufficiently trust its peer, it would be well advised to
+validate the IP addresses used by that peer - however that is considered out of
+scope for the document that will describe an IP proxying protocol.
+
 
 # Security Considerations
 
