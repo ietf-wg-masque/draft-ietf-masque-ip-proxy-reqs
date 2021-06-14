@@ -5,8 +5,8 @@
 Network Working Group                                  A. Chernyakhovsky
 Internet-Draft                                                 D. McCall
 Intended status: Informational                               D. Schinazi
-Expires: 14 December 2021                                     Google LLC
-                                                            12 June 2021
+Expires: 16 December 2021                                     Google LLC
+                                                            14 June 2021
 
 
          Requirements for a MASQUE Protocol to Proxy IP Traffic
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 December 2021.
+   This Internet-Draft will expire on 16 December 2021.
 
 Copyright Notice
 
@@ -217,7 +217,7 @@ Table of Contents
    not allow IP fragmentation by nodes along the path.  In cases where
    the tunnel endpoint is not the same as the communication endpoint,
    tunnel endpoints are expected to apply the guidance on UDP tunnels in
-   [BCP145].
+   [TUNNELS].
 
 3.4.  IP Assignment
 
@@ -467,11 +467,6 @@ Normative References
 
 Informative References
 
-   [BCP145]   Eggert, L., Fairhurst, G., and G. Shepherd, "UDP Usage
-              Guidelines", BCP 145, RFC 8085, DOI 10.17487/RFC8085,
-              March 2017,
-              <https://datatracker.ietf.org/doc/html/rfc8085>.
-
    [CONNECT-UDP]
               Schinazi, D., "The CONNECT-UDP HTTP Method", Work in
               Progress, Internet-Draft, draft-ietf-masque-connect-udp-
@@ -487,6 +482,12 @@ Informative References
    [OAUTH]    Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
               RFC 6749, DOI 10.17487/RFC6749, October 2012,
               <https://datatracker.ietf.org/doc/html/rfc6749>.
+
+   [TUNNELS]  Touch, J. and M. Townsley, "IP Tunnels in the Internet
+              Architecture", Work in Progress, Internet-Draft, draft-
+              ietf-intarea-tunnels-10, 12 September 2019,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-intarea-
+              tunnels-10.txt>.
 
 Authors' Addresses
 
