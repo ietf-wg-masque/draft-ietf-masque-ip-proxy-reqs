@@ -154,7 +154,7 @@ Transmission Unit (MTU) they are willing to forward. This will allow avoiding
 some IP fragmentation, especially as IPv6 does not allow IP fragmentation by
 nodes along the path. In cases where the tunnel endpoint is not the same as the
 communication endpoint, tunnel endpoints are expected to apply the guidance on
-UDP tunnels in {{?BCP145=RFC8085}}.
+UDP tunnels in {{?TUNNELS=I-D.ietf-intarea-tunnels}}.
 
 ## IP Assignment
 
